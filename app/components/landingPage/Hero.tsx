@@ -5,47 +5,50 @@ import { Rocket, Users, Trophy, Timer, Wallet, LayoutDashboard, PlayCircle } fro
 
 export const Hero = () => {
     return (
-        <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden py-5 px-6"> 
+        <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden py-5 px-6">
+            {/* Background Glow */}
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-125 h-125 bg-brand-primary/20 blur-[120px] rounded-full -z-10" />
 
-            <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center"> 
+            <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
                 >
                     <h1 className="text-5xl lg:text-7xl font-black tracking-tighter leading-[0.9] mb-6">
-                        IGNITE YOUR <br />
-                        <span className="text-brand-primary">COMPETITIVE</span> <br />
-                        LEARNING
+                        HOST THE <br />
+                        <span className="text-brand-primary uppercase">Ultimate</span> <br />
+                        LIVE ARENA
                     </h1>
-                    <p className="text-lg text-muted-foreground max-w-md mb-8 font-medium">
-                        The ultimate high-energy quiz platform. Synchronized rounds,
-                        real-time leaderboards, and instant rewards.
+                    <p className="text-lg text-muted-foreground max-w-md mb-8 font-medium italic">
+                        Stop hosting boring meetings. Ignite your crowd with
+                        fast-paced competition and real-life rewards
+                        that actually matter.
                     </p>
 
-                    <div className="flex flex-wrap items-center gap-4"> 
+                    <div className="flex flex-wrap items-center gap-4">
                         <button
                             type="button"
-                            onClick={() => {/* handle start */ }}
-                            className="group relative cursor-pointer flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-black rounded-2xl shadow-[0_6px_0_#1a5c2e] active:shadow-none active:translate-y-1 transition-all uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-brand-primary/40"
-                            aria-label="Start a new live quiz session"
+                            onClick={() => {/* Launch Arena Logic */ }}
+                            className="group relative cursor-pointer flex items-center gap-3 px-8 py-4 bg-brand-primary text-white font-black rounded-2xl shadow-[0_6px_0_#1a5c2e] active:shadow-none active:translate-y-1 transition-all uppercase tracking-wider focus:outline-none"
+                            aria-label="Start your live arena"
                         >
                             <PlayCircle className="w-5 h-5 transition-transform group-hover:scale-110" aria-hidden="true" />
-                            <span>Start a Quiz</span>
-                        </button> 
+                            <span>Go Live Now</span>
+                        </button>
                         <button
                             type="button"
-                            onClick={() => {/* handle navigate */ }}
-                            className="group cursor-pointer flex items-center gap-3 px-8 py-4 bg-transparent border-2 border-brand-navy dark:border-white text-foreground font-black rounded-2xl hover:bg-brand-navy hover:text-white dark:hover:bg-white dark:hover:text-brand-navy transition-all uppercase tracking-wider focus:outline-none focus:ring-4 focus:ring-brand-navy/20 dark:focus:ring-white/20"
-                            aria-label="View global and session leaderboards"
+                            onClick={() => {/* Leaderboard Logic */ }}
+                            className="group cursor-pointer flex items-center gap-3 px-8 py-4 bg-transparent border-2 border-brand-navy dark:border-white text-foreground font-black rounded-2xl hover:bg-brand-navy hover:text-white dark:hover:bg-white dark:hover:text-brand-navy transition-all uppercase tracking-wider focus:outline-none"
+                            aria-label="See current champions"
                         >
                             <Trophy className="w-5 h-5 transition-transform group-hover:rotate-12" aria-hidden="true" />
-                            <span>View Leaderboards</span>
+                            <span>See the Champions</span>
                         </button>
                     </div>
                 </motion.div>
 
+                {/* The "Hype" Carousel */}
                 <div className="relative h-125 w-full flex items-center justify-center">
                     <PuzzledCarousel />
                 </div>
@@ -56,18 +59,48 @@ export const Hero = () => {
 
 const PuzzledCarousel = () => {
     const screens = [
-        { id: 1, color: "#16a34a", icon: <Trophy size={30} />, label: "Real-Time Rankings" },
-        { id: 2, color: "#0f172a", icon: <Users size={30} />, label: "Participant Lobby" },
-        { id: 3, color: "#22c55e", icon: <Rocket size={30} />, label: "Rapid Fire Quiz" },
-        { id: 4, color: "#1e293b", icon: <Timer size={30} />, label: "5s Preview Sync" },
-        { id: 5, color: "#15803d", icon: <Wallet size={30} />, label: "Instant Payouts" },
-        { id: 6, color: "#334155", icon: <LayoutDashboard size={30} />, label: "Admin Host Console" },
+        {
+            id: 1,
+            color: "var(--brand-primary, #16a34a)", // Using CSS variables for global control
+            icon: <Trophy size={30} />,
+            label: "Winner's Podium"
+        },
+        {
+            id: 2,
+            color: "#0f172a",
+            icon: <Users size={30} />,
+            label: "Arena Entry"
+        },
+        {
+            id: 3,
+            color: "#22c55e",
+            icon: <Rocket size={30} />,
+            label: "Live Fire Round"
+        },
+        {
+            id: 4,
+            color: "#1e293b",
+            icon: <Timer size={30} />,
+            label: "The 5s Tension"
+        },
+        {
+            id: 5,
+            color: "#15803d",
+            icon: <Wallet size={30} />,
+            label: "Payout Access"
+        },
+        {
+            id: 6,
+            color: "#334155",
+            icon: <LayoutDashboard size={30} />,
+            label: "Master Controls"
+        },
     ];
 
     return (
-        <div className="relative w-full h-150 flex items-center justify-center perspective:1500px">
-            {screens.map((screen, index) => { 
-                const duration = 20; 
+        <div className="relative w-full h-150 flex items-center justify-center [perspective:1500px]">
+            {screens.map((screen, index) => {
+                const duration = 20;
                 const offset = index * (duration / screens.length);
 
                 return (
@@ -75,11 +108,11 @@ const PuzzledCarousel = () => {
                         key={screen.id}
                         initial={{ opacity: 0 }}
                         animate={{
-                            opacity: [0, 1, 1, 0],  
+                            opacity: [0, 1, 1, 0],
                             x: [250, 0, -250, 0, 250],
                             y: [0, 40, 0, -40, 0],
                             scale: [0.6, 1.1, 0.6, 0.4, 0.6],
-                            rotateY: [30, 0, -30, 0, 30], 
+                            rotateY: [30, 0, -30, 0, 30],
                             zIndex: [10, 50, 10, 0, 10],
                         }}
                         transition={{
@@ -92,7 +125,8 @@ const PuzzledCarousel = () => {
                         style={{
                             backgroundColor: screen.color,
                         }}
-                    > 
+                    >
+                        {/* Glass Overlay */}
                         <div className="absolute inset-0 rounded-[2.5rem] bg-linear-to-b from-white/20 to-transparent opacity-20 pointer-events-none" />
 
                         <div className="relative">
@@ -103,7 +137,7 @@ const PuzzledCarousel = () => {
 
                         <div className="relative space-y-4">
                             <div className="flex items-center gap-2">
-                                <div className="h-1.5 w-1.5 rounded-full bg-brand-primary animate-ping" />
+                                <div className="h-1.5 w-1.5 rounded-full bg-white animate-ping" />
                                 <div className="h-1 w-12 bg-white/20 rounded-full" />
                             </div>
                             <div>
@@ -111,7 +145,7 @@ const PuzzledCarousel = () => {
                                     {screen.label}
                                 </h3>
                                 <p className="text-[9px] font-medium text-white/40 uppercase tracking-[0.15em] mt-1">
-                                    GreenLight Platform
+                                    GreenLight Arena
                                 </p>
                             </div>
                         </div>

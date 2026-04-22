@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
@@ -9,13 +9,56 @@ const lexend = Lexend({
   subsets: ["latin"],
   variable: "--font-lexend",
   display: "swap",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+
 });
 
+export const viewport: Viewport = {
+  themeColor: "#1a5c2e", // Your brand-primary hex
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  title: "Green Light Quiz | Ignite Your Learning",
-  description: "The ultimate high-energy quiz platform for competitive learning.",
+  metadataBase: new URL("https://greenlightquiz.com"),
+  title: {
+    default: "GreenLight Quiz | Ignite Your Learning",
+    template: "%s | GreenLight Quiz",
+  },
+  description: "The ultimate high-energy quiz platform for competitive learning. Real-time sync, instant rewards, and branded arenas.",
+  keywords: ["Quiz Platform", "Competitive Learning", "Gamified Education", "Real-time Trivia", "GreenLight"],
+  authors: [{ name: "Moses Oyelere" }],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "GreenLight Quiz | Ignite Your Learning",
+    description: "The ultimate high-energy quiz platform for competitive learning.",
+    url: "https://greenlightquiz.com",
+    siteName: "GreenLight Quiz",
+    images: [
+      {
+        url: "/og-image.jpg", // Ensure you have this in your /public folder
+        width: 1200,
+        height: 630,
+        alt: "GreenLight Arena Preview",
+      },
+    ],
+    locale: "en_UK",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GreenLight Quiz | Ignite Your Learning",
+    description: "Host high-stakes synchronized quizzes anywhere.",
+    images: ["/og-image.jpg"],
+  },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png" }],
   },
 };
 

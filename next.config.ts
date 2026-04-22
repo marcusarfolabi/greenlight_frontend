@@ -2,7 +2,25 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["play.google.com", "developer.apple.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "play.google.com",
+        port: "",
+        pathname: "/**",  
+      },
+      {
+        protocol: "https",
+        hostname: "developer.apple.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  }, 
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
   },
 };
 

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { FAQS } from "@/settings";
 
 
@@ -10,17 +10,14 @@ export const FAQ = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
     return (
-        <section className="py-24  transition-colors duration-300 relative overflow-hidden">
+        <section className="py-4 transition-colors duration-300 relative overflow-hidden">
             <div
                 className="absolute top-1/4 left-1/2 -translate-x-1/2 w-125 h-125 bg-brand-primary/20 blur-[120px] pointer-events-none -z-10"
                 aria-hidden="true"
             />
             <div className="max-w-4xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 text-brand-primary mb-6">
-                        <HelpCircle size={18} />
-                        <span className="text-sm font-black uppercase tracking-widest">Support Arena</span>
-                    </div>
+
                     <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4 text-foreground">
                         Frequently Asked <span className="text-brand-primary text-outline">Questions</span>
                     </h2>
