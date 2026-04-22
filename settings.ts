@@ -7,6 +7,13 @@ import {
   Briefcase,
   Mic2,
   Users2,
+  LucideProps,
+  Zap,
+  Timer,
+  BarChart3,
+  Settings2,
+  ShieldCheck,
+  Wallet,
 } from "lucide-react";
 
 export const FOOTER_ACTIONS = [
@@ -161,5 +168,58 @@ export const FAQS = [
     question: "Who’s really in charge during the game?",
     answer:
       "You are. As the Host, you have the master controls. You decide when the next round starts, when to pause for a breather, and you even have the power to override the leaderboard. You aren't just a host; you're the director.",
+  },
+];
+
+interface FeatureItem {
+  title: string;
+  desc: string;
+  icon: React.ComponentType<LucideProps>;
+  aria: string;
+  color: string;
+}
+
+export const FEATURES: FeatureItem[] = [
+  {
+    title: "Dead-Simple Sync",
+    desc: "No lag. No cheating. Every player sees the same question at the exact same time, whether they are next to you or across the ocean.",
+    icon: Zap,
+    aria: "Fast lightning bolt icon",
+    color: "bg-blue-500",
+  },
+  {
+    title: "The 5-Second Hype",
+    desc: "Build massive tension with a quick sneak peek of the question before the timer starts. It keeps everyone glued to their screens.",
+    icon: Timer,
+    aria: "Timer icon",
+    color: "bg-purple-500",
+  },
+  {
+    title: "Instant Cash-Outs",
+    desc: "Send winnings directly to your champions' accounts the moment the game ends. Secure, fast, and completely automated.",
+    icon: Wallet,
+    aria: "Wallet icon",
+    color: "bg-brand-primary",
+  },
+  {
+    title: "Total Host Power",
+    desc: "You are the director. Control the flow, pause the action, or kick off the next round with one tap from your private console.",
+    icon: Settings2,
+    aria: "Settings icon",
+    color: "bg-orange-500",
+  },
+  {
+    title: "Live Leaderboards",
+    desc: "Watch the rankings shift in real-time. Every point counts, and every player knows exactly where they stand after every question.",
+    icon: BarChart3,
+    aria: "Bar chart icon",
+    color: "bg-pink-500",
+  },
+  {
+    title: "Verified Wins",
+    desc: "Every result is tracked and proofed. Get a full breakdown of speed and accuracy so there’s never a doubt who the real champion is.",
+    icon: ShieldCheck,
+    aria: "Shield icon",
+    color: "bg-cyan-500",
   },
 ];

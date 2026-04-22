@@ -11,59 +11,9 @@ import {
     Wallet,
     LucideProps
 } from "lucide-react";
+import { FEATURES } from "@/settings";
 
-interface FeatureItem {
-    title: string;
-    desc: string;
-    icon: React.ComponentType<LucideProps>;
-    aria: string;
-    color: string;
-}
 
-const features: FeatureItem[] = [
-    {
-        title: "Synchronized Display",
-        desc: "Every player sees questions at the same micro-second for a truly fair competitive environment.",
-        icon: Zap,
-        aria: "Fast lightning bolt icon",
-        color: "bg-blue-500"
-    },
-    {
-        title: "5s Preview Phase",
-        desc: "A strategic countdown before each round keeps participants on the edge of their seats.",
-        icon: Timer,
-        aria: "Timer icon",
-        color: "bg-purple-500"
-    },
-    {
-        title: "Payout Profiles",
-        desc: "Securely input bank details for direct, real-time distribution of winnings.",
-        icon: Wallet,
-        aria: "Wallet icon",
-        color: "bg-brand-primary"
-    },
-    {
-        title: "Live Host Console",
-        desc: "Admins maintain total control with manual flow triggers and readiness monitoring.",
-        icon: Settings2,
-        aria: "Settings icon",
-        color: "bg-orange-500"
-    },
-    {
-        title: "Real-Time Rankings",
-        desc: "Global rankings update instantly after every single question input.",
-        icon: BarChart3,
-        aria: "Bar chart icon",
-        color: "bg-pink-500"
-    },
-    {
-        title: "Verified Results",
-        desc: "Performance summaries including accuracy, speed, and final global ranking.",
-        icon: ShieldCheck,
-        aria: "Shield icon",
-        color: "bg-cyan-500"
-    }
-];
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -109,7 +59,7 @@ export const Features = () => {
                     viewport={{ once: true }}
                     className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
                 >
-                    {features.map((f, i) => {
+                    {FEATURES.map((f, i) => {
                         const IconComponent = f.icon;
                         return (
                             <motion.div
