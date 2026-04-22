@@ -3,7 +3,7 @@
 import { ArenaButton } from "@/app/components/common/ArenaButton";
 import { ArenaInput } from "@/app/components/common/ArenaInput";
 import { SocialButton } from "@/app/components/common/SocialButton";
- import Link from "next/link";
+import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -15,11 +15,11 @@ export default function LoginPage() {
         e.preventDefault();
         setLoading(true);
 
-        try { 
-            await new Promise((resolve) => setTimeout(resolve, 2000)); 
-            toast.success("Entry Granted!"); 
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+            toast.success("Entry Granted!");
         } catch (error) {
-            toast.error("Invalid credentials. Please check your password."); 
+            toast.error("Invalid credentials. Please check your password.");
         } finally {
             setLoading(false);
         }
@@ -30,7 +30,7 @@ export default function LoginPage() {
         try {
             // Simulate OAuth redirect
             await new Promise((resolve) => setTimeout(resolve, 1500));
-            toast.success("Redirecting to Google..." ); 
+            toast.success("Redirecting to Google...");
         } finally {
             setGoogleLoading(false);
         }
@@ -57,13 +57,12 @@ export default function LoginPage() {
             </div>
 
             {/* The Divider */}
-            <div className="relative py-4 flex items-center justify-center"> 
-                <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t border-slate-200  dark:border-white/10"></span>
-                </div> 
-                <span className="relative z-10 bg-white rounded-2xl dark:bg-brand-navy px-4 text-[10px] uppercase font-black tracking-[0.2em] text-slate-400">
-                    OR LOGIN WITH EMAIL
+            <div className="relative py-2 flex items-center">
+                <div className="grow border-t border-border"></div>
+                <span className="px-4 text-[10px] font-black text-muted-foreground uppercase tracking-widest">
+                    Or Use Email
                 </span>
+                <div className="grow border-t border-border"></div>
             </div>
             <form onSubmit={handleLogin} className="space-y-4">
                 <ArenaInput
