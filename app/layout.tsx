@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import { Navbar } from "./components/landingPage/Navbar";
 import { Footer } from "./components/landingPage/Footer";
+import { InstallPrompt } from "./components/InstallPrompt";
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -80,6 +81,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html
       lang="en"
@@ -98,6 +100,7 @@ export default function RootLayout({
           <main className="grow">
             {children}
           </main>
+          <InstallPrompt /> {/* <--- It lives here */}
           <Footer />
         </ThemeProvider>
       </body>
