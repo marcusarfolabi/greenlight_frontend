@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ThemeToggle } from "../theme-toggle"
 import { NAV_LINKS } from "@/settings"
+import { AUTH_URL } from "@/app/lib/constants"
 
 export function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false)
@@ -36,6 +37,7 @@ export function Navbar() {
                         {NAV_LINKS.map((link) => (
                             <Link
                                 key={link.name}
+                                prefetch
                                 href={link.href}
                                 className="text-sm font-bold text-foreground/80 hover:text-brand-primary transition-colors"
                             >
@@ -51,12 +53,14 @@ export function Navbar() {
                         Play
                     </Link>
 
-                    <Link href="/signup" className="btn-quiz py-1.5 px-3 sm:py-2 sm:px-5 text-[10px] sm:text-xs lg:text-sm whitespace-nowrap">
+                    <Link
+                        href={`${AUTH_URL}/signup`} prefetch
+                        className="btn-quiz py-1.5 px-3 sm:py-2 sm:px-5 text-[10px] sm:text-xs lg:text-sm whitespace-nowrap"
+                    >
                         Start for FREE
                     </Link>
 
-                    {/* Log in - Now visible on all devices */}
-                    <Link href="/login" className="text-[11px] sm:text-sm font-black uppercase hover:text-brand-primary px-1">
+                    <Link href={`${AUTH_URL}/login`} prefetch className="text-[11px] sm:text-sm font-black uppercase hover:text-brand-primary px-1">
                         Log in
                     </Link>
 

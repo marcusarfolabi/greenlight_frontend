@@ -5,6 +5,8 @@ import { ThemeProvider } from "./components/theme-provider";
 import { Navbar } from "./components/landingPage/Navbar";
 import { Footer } from "./components/landingPage/Footer";
 import { InstallPrompt } from "./components/InstallPrompt";
+import { Toaster } from "sonner";
+import { ArenaToaster } from "./components/common/ArenaToaster";
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -51,7 +53,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/og-image.jpg",  
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "GreenLight Arena Preview",
@@ -81,7 +83,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
+
   return (
     <html
       lang="en"
@@ -100,7 +102,8 @@ export default function RootLayout({
           <main className="grow">
             {children}
           </main>
-          <InstallPrompt /> {/* <--- It lives here */}
+          <InstallPrompt />
+          <ArenaToaster />
           <Footer />
         </ThemeProvider>
       </body>
