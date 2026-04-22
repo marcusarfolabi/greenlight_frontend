@@ -14,16 +14,27 @@ const lexend = Lexend({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#1a5c2e", // Your brand-primary hex
   width: "device-width",
   initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#1a5c2e" },
+    { media: "(prefers-color-scheme: light)", color: "#0f172a" }
+  ],
+
+  colorScheme: "dark"
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://greenlightquiz.com"),
+  manifest: "/manifest.json",
   title: {
     default: "GreenLight Quiz | Ignite Your Learning",
     template: "%s | GreenLight Quiz",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "GreenLight",
   },
   description: "The ultimate high-energy quiz platform for competitive learning. Real-time sync, instant rewards, and branded arenas.",
   keywords: ["Quiz Platform", "Competitive Learning", "Gamified Education", "Real-time Trivia", "GreenLight"],
@@ -36,9 +47,10 @@ export const metadata: Metadata = {
     description: "The ultimate high-energy quiz platform for competitive learning.",
     url: "https://greenlightquiz.com",
     siteName: "GreenLight Quiz",
+
     images: [
       {
-        url: "/og-image.jpg", // Ensure you have this in your /public folder
+        url: "/og-image.jpg",  
         width: 1200,
         height: 630,
         alt: "GreenLight Arena Preview",
@@ -59,6 +71,7 @@ export const metadata: Metadata = {
       { url: "/icon.png", type: "image/png" },
     ],
     apple: [{ url: "/apple-touch-icon.png" }],
+    shortcut: "/icon.png",
   },
 };
 
