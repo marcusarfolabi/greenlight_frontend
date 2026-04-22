@@ -1,19 +1,7 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
-import {
-    Zap,
-    ShieldCheck,
-    BarChart3,
-    Settings2,
-    Timer,
-    Wallet,
-    LucideProps
-} from "lucide-react";
-import { FEATURES } from "@/settings";
-
-
+import { motion } from "framer-motion"; 
+import { FEATURES } from "@/settings"; 
 
 const containerVariants = {
     hidden: { opacity: 0 },

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, MessageCircle } from "lucide-react";
 import { FAQS } from "@/settings";
 
 
@@ -10,14 +10,13 @@ export const FAQ = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
     return (
-        <section className="py-4 transition-colors duration-300 relative overflow-hidden">
+        <section className="py-24 transition-colors duration-300 relative overflow-hidden">
             <div
                 className="absolute top-1/4 left-1/2 -translate-x-1/2 w-125 h-125 bg-brand-primary/20 blur-[120px] pointer-events-none -z-10"
                 aria-hidden="true"
             />
             <div className="max-w-4xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-16">
-
                     <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4 text-foreground">
                         Frequently Asked <span className="text-brand-primary text-outline">Questions</span>
                     </h2>
@@ -69,6 +68,31 @@ export const FAQ = () => {
                         </div>
                     ))}
                 </div>
+
+                {/* Pro-Tip: The "Still Have Questions?" Strip */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mt-16 p-8 bg-brand-navy/5 dark:bg-white/5 rounded-[2.5rem] border-2 border-dashed border-brand-navy/20 dark:border-white/20 flex flex-col md:flex-row items-center justify-between gap-6"
+                >
+                    <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-brand-primary rounded-2xl flex items-center justify-center text-white shadow-lg">
+                            <MessageCircle size={24} />
+                        </div>
+                        <div className="text-center md:text-left">
+                            <h4 className="font-black uppercase tracking-tight text-lg">Still have questions?</h4>
+                            <p className="text-sm text-muted-foreground font-bold">We’re online and ready to help you host.</p>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        className="px-8 py-4 bg-foreground cursor-pointer text-background font-black rounded-2xl hover:scale-105 active:scale-95 transition-all uppercase tracking-widest text-xs"
+                    >
+                        Chat With Us Now
+                    </button>
+                </motion.div>
             </div>
         </section>
     );

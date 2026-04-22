@@ -104,70 +104,69 @@ interface AudienceItem {
 
 export const AUDIENCE_LIST: AudienceItem[] = [
   {
-    role: "Corporate Leaders",
+    role: "Corporate Teams",
     useCase:
-      "Turn dry training into high-stakes synchronized competitions. Boost retention with real-time pressure.",
+      "Transform boring training into high-energy showdowns. Perfect for remote teams who need a real reason to engage.",
     icon: Briefcase,
     color: "bg-blue-600",
-    ariaLabel: "Explore GreenLight for corporate training and leadership",
+    ariaLabel: "Host corporate team building sessions",
   },
   {
-    role: "Educators & Schools",
+    role: "Modern Educators",
     useCase:
-      "Gamify the classroom. Use the 5s Preview to build anticipation and reward accuracy with instant standings.",
+      "Stop competing with phone screens. Turn your lessons into a game your students actually want to win.",
     icon: GraduationCap,
     color: "bg-brand-primary",
-    ariaLabel: "Explore GreenLight for classroom and educational gamification",
+    ariaLabel: "Host gamified classroom sessions",
   },
   {
-    role: "Event Organizers",
+    role: "Event Pros",
     useCase:
-      "Live trivia for thousands. Use the Host Console to trigger rounds manually and crown champions.",
+      "Run live trivia for 10 or 10,000. Use our pro tools to control the stage and crown your champions live.",
     icon: Mic2,
     color: "bg-orange-500",
-    ariaLabel: "Explore GreenLight for large scale events and live trivia",
+    ariaLabel: "Host large scale live events",
   },
   {
-    role: "Community Hosts",
+    role: "Community Creators",
     useCase:
-      "Run remote game nights. Seamless payout profiles ensure winners get their glory and rewards instantly.",
+      "Host the ultimate game night. Send rewards to winners instantly and keep the hype going round after round.",
     icon: Users2,
     color: "bg-purple-600",
-    ariaLabel:
-      "Explore GreenLight for community game nights and remote hosting",
+    ariaLabel: "Host community game nights",
   },
 ];
 
 export const FAQS = [
   {
-    question: "Is the action actually in sync?",
+    question: "How do I know there won't be any lag?",
     answer:
-      "Every single heartbeat. We’ve perfected our sync so that every player, whether they're in the front row or across the globe, sees the clock tick and the questions drop at the exact same millisecond. No lag, no spoilers, just pure competition.",
+      "We’ve built this for the 'split-second' moments. Whether your players are in the same room or across the globe, every clock ticks and every question drops at the exact same millisecond. No spoilers from the fast-internet crowd—just a fair, high-speed race to the top.",
   },
   {
-    question: "What’s the deal with the '5s Preview'?",
+    question: "Will this actually keep my audience's attention?",
     answer:
-      "It’s the ultimate hype-builder. We give your players a 5-second 'sneak peek' at the question before the timer starts. It builds massive anticipation, levels the playing field, and gets the adrenaline pumping before the chaos begins.",
+      "Yes—because we don't just show questions, we build tension. Our signature 5-second 'Sneak Peek' gets the adrenaline pumping before the timer even starts. It turns a simple quiz into a high-stakes show that people can't look away from.",
   },
   {
-    question: "Can I reward my champions instantly?",
+    question: "Can I really pay out winners the moment they win?",
     answer:
-      "Absolutely. Turn glory into gold. You can link your preferred payment method to send rewards and payouts the moment the final podium ceremony ends. Winning has never felt so real.",
+      "Real glory deserves real rewards. You can link your payout profiles to send cash or prizes instantly after the final podium ceremony. It turns 'good job' into a life-changing win, instantly.",
   },
   {
-    question: "Can it handle a massive crowd?",
+    question: "Is it going to crash if I have thousands of players?",
     answer:
-      "From a focused boardroom of 10 to a packed stadium of 10,000+, we don't blink. Our system is built to grow with your ambition, ensuring a smooth, high-stakes experience no matter how many people enter the arena.",
+      "We don't blink at big crowds. From a private team of 10 to a stadium of 10,000+, our system scales automatically. Your only job is to host; we handle the heavy lifting to keep the experience smooth and fast.",
   },
   {
-    question: "Can I make the arena look like my brand?",
+    question: "Does it look like a generic app or MY brand?",
     answer:
-      "Your game, your rules. You can fully skin your arena with your own colors, logos, and custom themes. We even use AI to help you create unique visual styles that make your brand the star of the show.",
+      "This is your arena. You can fully customize the colors, upload your logos, and even use our AI to generate a theme that matches your brand’s vibe perfectly. Your audience stays in your world from the first question to the last.",
   },
   {
-    question: "Who’s really in charge during the game?",
+    question: "What if I need to pause or change things mid-game?",
     answer:
-      "You are. As the Host, you have the master controls. You decide when the next round starts, when to pause for a breather, and you even have the power to override the leaderboard. You aren't just a host; you're the director.",
+      "You have the Master Controls. As the Host, you are the Director. You decide when to start the next round, when to take a break, and you even have the power to manually adjust the leaderboard. You stay in total control of the energy.",
   },
 ];
 
