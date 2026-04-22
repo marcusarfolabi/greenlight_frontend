@@ -1,0 +1,21 @@
+frontend/
+├── app/
+│   │   ├── (landingPage)/          # Landing Page Route Group
+│   │   │   ├── layout.tsx        # Nav & Footer for landing page
+│   │   │   └── page.tsx          # The Hero, Features, etc.
+│   │   ├── (admin)/              # Dashboard Route Group
+│   │   │   ├── layout.tsx        # Sidebar & Admin Header
+│   │   │   ├── dashboard/        # Overview of quizzes
+│   │   │   │   └── page.tsx
+│   │   │   └── create/           # Quiz Creator interface
+│   │   │       └── page.tsx
+│   │   ├── api/                  # Backend routes (Next.js Route Handlers)
+│   │   └── globals.css
+│   ├── components/
+│   │   ├── landingPage/            # Landing specific: Hero, Features
+│   │   ├── admin/                # Admin specific: Sidebar, QuestionEditor
+│   │   └── shared/               # Reusable: Buttons, Inputs, Brand Logo
+│   ├── hooks/                    # Custom hooks (e.g., useQuizSession)
+│   ├── lib/                      # Utils (cn helper, database config)
+│   └── types/                    # TypeScript interfaces for Quizzes
+├── public/                       # Audio files (click.mp3) and SVGs

@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  /* --- Branding Colors (From Logo) --- */
+  --color-brand-leaf: #4ade80;
+  --color-brand-primary: #22c55e;
+  --color-brand-vegetable: #14532d;
+  --color-brand-navy: #0f172a;
+
+  /* --- Semantic Mapping --- */
+  --color-background: white;
+  --color-foreground: var(--color-brand-navy);
+  --color-btn-primary: var(--color-brand-primary);
+  --color-btn-text: white;
+
+  /* --- Typography --- */
+  --font-lexend: var(--font-lexend);
+
+  /* --- Animations --- */
+  --animate-bounce-tactile: bounce-tactile 0.2s ease-in-out;
+
+  @keyframes bounce-tactile {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(0.98);
+    }
+  }
+}
+
+/* --- Theme Variants --- */
+@variant dark (&:where(.dark, [data-theme="dark"] *));
+
+.dark {
+  --color-background: var(--color-brand-navy);
+  --color-foreground: #f0fdf4;
+  --color-btn-primary: var(--color-brand-leaf);
+  --color-btn-text: var(--color-brand-navy);
+}
+
+/* --- Base & Custom Scrollbar --- */
+@layer base {
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-family: var(--font-lexend), sans-serif;
+  }
+
+  /* Custom Scrollbar Logic */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-vegetable/30 rounded-full border-2 border-solid border-transparent bg-clip-padding hover:bg-brand-primary;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-brand-leaf/20 hover:bg-brand-leaf;
+  }
+}
+
+/* --- Components --- */
+@layer components {
+  .btn-quiz {
+    @apply relative px-6 py-3 rounded-2xl font-black uppercase tracking-wider bg-btn-primary text-btn-text border-b-[6px] border-black/20 hover:brightness-110 active:border-b-0 active:translate-y-1 transition-all duration-75 select-none cursor-pointer;
+  }
+
+  .answer-card {
+    @apply flex items-center gap-4 p-4 rounded-xl border-2 border-transparent bg-brand-primary/5 backdrop-blur-sm hover:border-brand-primary transition-all cursor-pointer;
+  }
+}
