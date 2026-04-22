@@ -12,7 +12,7 @@ interface BeforeInstallPromptEvent extends Event {
     prompt(): Promise<void>;
 }
 
-export const InstallPrompt = () => { 
+export const InstallPrompt = () => {
     const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -42,31 +42,37 @@ export const InstallPrompt = () => {
 
     if (!isVisible) return null;
 
-    return (
-        <div className="fixed bottom-6 left-6 right-6 md:left-auto md:right-10 z-50 animate-in fade-in slide-in-from-bottom-5">
-            <div className="bg-brand-navy dark:bg-card border-2 border-brand-primary/50 p-4 rounded-2xl shadow-2xl flex items-center justify-between gap-4 max-w-md">
+    return ( 
+        <div className="fixed bottom-4 left-6 right-6 px-4 md:px-0 md:left-auto md:bottom-10 z-50 flex justify-center animate-in fade-in slide-in-from-bottom-5 duration-500">
+            <div className="flex items-center gap-4 bg-brand-navy/95 dark:bg-card/95 backdrop-blur-md border border-white/10 p-2 pl-4 rounded-full shadow-xl max-w-sm md:max-w-md">
+
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-brand-primary rounded-xl flex items-center justify-center text-white shrink-0">
-                        <Download size={20} />
+                    <div className="hidden sm:flex w-8 h-8 bg-brand-primary/20 text-brand-primary rounded-full items-center justify-center shrink-0">
+                        <Download size={16} strokeWidth={3} />
                     </div>
-                    <div>
-                        <p className="text-sm font-black uppercase text-white">Install GreenLight</p>
-                        <p className="text-xs text-muted-foreground font-medium">Add to home screen for the best experience.</p>
+                    <div className="flex flex-col">
+                        <p className="text-[11px] md:text-xs font-black uppercase tracking-widest text-white leading-none">
+                            GreenLight App
+                        </p>
+                        <p className="hidden md:block text-[10px] text-muted-foreground font-bold mt-0.5">
+                            Install for zero-lag performance
+                        </p>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
                     <button
                         onClick={handleInstallClick}
-                        className="bg-brand-primary text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-tight hover:scale-105 active:scale-95 transition-all"
+                        className="bg-brand-primary text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter hover:bg-brand-primary/90 transition-all whitespace-nowrap"
                     >
                         Install
                     </button>
                     <button
                         onClick={() => setIsVisible(false)}
-                        className="p-2 text-muted-foreground hover:text-white transition-colors"
+                        className="p-1.5 text-muted-foreground hover:text-white transition-colors"
+                        aria-label="Dismiss"
                     >
-                        <X size={18} />
+                        <X size={14} />
                     </button>
                 </div>
             </div>

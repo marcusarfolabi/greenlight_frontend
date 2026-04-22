@@ -8,8 +8,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ThemeToggle } from "../theme-toggle"
 import { NAV_LINKS } from "@/settings"
 
-
-
 export function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false)
 

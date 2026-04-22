@@ -5,8 +5,7 @@ import { Rocket, Users, Trophy, Timer, Wallet, LayoutDashboard, PlayCircle } fro
 
 export const Hero = () => {
     return (
-        <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden py-5 px-6">
-            {/* Background Glow */}
+        <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden py-12 px-6">
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-125 h-125 bg-brand-primary/20 blur-[120px] rounded-full -z-10" />
 
             <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
