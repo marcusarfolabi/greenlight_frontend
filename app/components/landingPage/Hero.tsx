@@ -19,7 +19,7 @@ export const Hero = () => {
                         <span className="text-brand-primary uppercase">Ultimate</span> <br />
                         LIVE ARENA
                     </h1>
-                    <p className="text-lg text-muted-foreground max-w-md mb-8 font-medium italic">
+                    <p className="text-lg text-muted-foreground max-w-md mb-8 font-medium ">
                         Stop hosting boring meetings. Ignite your crowd with
                         fast-paced competition and real-life rewards
                         that actually matter.
@@ -60,7 +60,7 @@ const PuzzledCarousel = () => {
     const screens = [
         {
             id: 1,
-            color: "var(--brand-primary, #16a34a)", // Using CSS variables for global control
+            color: "var(--brand-primary, #16a34a)", 
             icon: <Trophy size={30} />,
             label: "Winner's Podium"
         },
@@ -97,7 +97,7 @@ const PuzzledCarousel = () => {
     ];
 
     return (
-        <div className="relative w-full h-150 flex items-center justify-center [perspective:1500px]">
+        <div className="relative w-full h-150 flex items-center justify-center perspective:1500px">
             {screens.map((screen, index) => {
                 const duration = 20;
                 const offset = index * (duration / screens.length);
@@ -125,7 +125,6 @@ const PuzzledCarousel = () => {
                             backgroundColor: screen.color,
                         }}
                     >
-                        {/* Glass Overlay */}
                         <div className="absolute inset-0 rounded-[2.5rem] bg-linear-to-b from-white/20 to-transparent opacity-20 pointer-events-none" />
 
                         <div className="relative">

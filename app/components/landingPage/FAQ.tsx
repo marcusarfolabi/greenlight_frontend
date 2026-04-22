@@ -20,7 +20,7 @@ export const FAQ = () => {
                     <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4 text-foreground">
                         Frequently Asked <span className="text-brand-primary text-outline">Questions</span>
                     </h2>
-                    <p className="text-muted-foreground font-bold italic">
+                    <p className="text-muted-foreground font-bold">
                         Everything you need to know to start your first session.
                     </p>
                 </div>
@@ -74,7 +74,7 @@ export const FAQ = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mt-16 p-8 bg-brand-navy/5 dark:bg-white/5 rounded-[2.5rem] border-2 border-dashed border-brand-navy/20 dark:border-white/20 flex flex-col md:flex-row items-center justify-between gap-6"
+                    className="mt-16 p-8 bg-brand-navy/5 dark:bg-white/5 rounded-[2.5rem] border border-dashed border-brand-navy/20 dark:border-white/20 flex flex-col md:flex-row items-center justify-between gap-6"
                 >
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-brand-primary rounded-2xl flex items-center justify-center text-white shadow-lg">
