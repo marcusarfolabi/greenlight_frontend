@@ -224,20 +224,10 @@ export const FEATURES: FeatureItem[] = [
 ];
 
 export const INDUSTRY_OPTIONS = [
-  { value: "corporate", label: "Corporate & Enterprise" },
-  { value: "hr_recruitment", label: "HR & Recruitment" },
-  { value: "fintech_banking", label: "Fintech & Banking" },
-  { value: "tech_software", label: "Tech & Software" },
-  { value: "events", label: "Live Events & Festivals" },
-  { value: "gaming_esports", label: "Gaming & Esports" },
-  { value: "marketing_agency", label: "Marketing & Ad Agencies" },
-  { value: "k12_education", label: "K-12 Education" },
-  { value: "higher_ed", label: "University & Higher Ed" },
-  { value: "government", label: "Gov & Public Sector" },
-  { value: "non_profit", label: "Non-Profit & NGO" },
-  { value: "healthcare", label: "Healthcare & Pharma" },
-  { value: "real_estate", label: "Real Estate & Property" },
-  { value: "retail_ecommerce", label: "Retail & E-commerce" },
-  { value: "religious", label: "Religious Organizations" },
-  { value: "other", label: "Other / Personal" },
+  { value: "corporate", label: "Business & Tech" }, // Groups: Corp, Tech, Fintech, Retail, Real Estate
+  { value: "education", label: "Education" }, // Groups: K-12, University
+  { value: "events", label: "Events & Media" }, // Groups: Festivals, Marketing, Agency
+  { value: "gaming", label: "Gaming & Esports" }, // Stays specific (high-engagement niche)
+  { value: "public_sector", label: "Public & NGO" }, // Groups: Gov, Non-Profit, Religious, Healthcare
+  { value: "other", label: "Personal / Other" }, // Groups: Personal, Other
 ];

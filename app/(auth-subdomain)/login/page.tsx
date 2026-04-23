@@ -2,14 +2,15 @@
 
 import { ArenaButton } from "@/app/components/common/ArenaButton";
 import { ArenaInput } from "@/app/components/common/ArenaInput";
-import { SocialButton } from "@/app/components/common/SocialButton";
+import { SocialAuthSection } from "@/app/components/common/SocialAuthSection";
+import { SocialProvider } from "@/app/components/common/SocialButton";
 import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function LoginPage() {
     const [loading, setLoading] = useState(false);
-    const [googleLoading, setGoogleLoading] = useState(false);
+    const [activeProvider, setActiveProvider] = useState<SocialProvider | null>(null);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -25,14 +26,14 @@ export default function LoginPage() {
         }
     };
 
-    const handleGoogleLogin = async () => {
-        setGoogleLoading(true);
+    const handleSocialLogin = async (provider: SocialProvider) => {
+        setActiveProvider(provider);
         try {
             // Simulate OAuth redirect
             await new Promise((resolve) => setTimeout(resolve, 1500));
-            toast.success("Redirecting to Google...");
+            toast.success(`Redirecting to ${provider.charAt(0).toUpperCase()}${provider.slice(1)}...`);
         } finally {
-            setGoogleLoading(false);
+            setActiveProvider(null);
         }
     };
 
@@ -42,44 +43,9 @@ export default function LoginPage() {
                 <h1 className="text-3xl font-black text-foreground tracking-tight">
                     Welcome Back!
                 </h1>
-                <p className="text-muted-foreground font-medium mt-2">
-                    Ready to enter the arena?
-                </p>
             </div>
 
-            {/* Social Login Section */}
-            <div className="space-y-3">
-              {/* Social Login Section */}
-<div className="flex items-center gap-3 w-full">
-    <SocialButton
-        provider="google"
-        isLoading={googleLoading}
-        onClick={handleGoogleLogin}
-        className="flex-1" // Allows buttons to grow equally
-    />
-    <SocialButton
-        provider="apple"
-        isLoading={googleLoading}
-        onClick={handleGoogleLogin}
-        className="flex-1"
-    />
-    <SocialButton
-        provider="linkedin"
-        isLoading={googleLoading}
-        onClick={handleGoogleLogin}
-        className="flex-1"
-    />
-</div>
-            </div>
-
-            {/* The Divider */}
-            <div className="relative py-2 flex items-center">
-                <div className="grow border-t border-border"></div>
-                <span className="px-4 text-[10px] font-black text-muted-foreground uppercase tracking-widest">
-                    Or Use Email
-                </span>
-                <div className="grow border-t border-border"></div>
-            </div>
+            <SocialAuthSection activeProvider={activeProvider} onProviderClick={handleSocialLogin} />
             <form onSubmit={handleLogin} className="space-y-4">
                 <ArenaInput
                     label="Email or Username"

@@ -1,108 +1,191 @@
 "use client";
 
-import { useForm, Controller } from "react-hook-form";
+import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { toast } from "react-hot-toast";
 import { ArenaButton } from "@/app/components/common/ArenaButton";
 import { ArenaInput } from "@/app/components/common/ArenaInput";
-import { ArenaSelect } from "@/app/components/common/ArenaSelect";
+import { SocialAuthSection } from "@/app/components/common/SocialAuthSection";
+import { SocialProvider } from "@/app/components/common/SocialButton";
 import { HostSignupValues, hostSignupSchema } from "@/app/lib/validations/auth";
 import { INDUSTRY_OPTIONS } from "@/settings";
+import clsx from "clsx";
+import Link from "next/link";
+
+const extendedSignupSchema = hostSignupSchema.extend({
+    otp: z.string(),
+});
+
+type ExtendedSignupValues = HostSignupValues & { otp: string };
+type Step = "EMAIL" | "VERIFY" | "INDUSTRY" | "DETAILS";
 
 export default function HostSignupForm() {
+    const [currentStep, setCurrentStep] = useState<Step>("EMAIL");
+    const [activeProvider, setActiveProvider] = useState<SocialProvider | null>(null);
+
     const {
+        control,
         register,
         handleSubmit,
-        control,
+        trigger,
+        getValues,
+        setValue,
         formState: { errors, isSubmitting },
-    } = useForm<HostSignupValues>({
-        resolver: zodResolver(hostSignupSchema),
-        defaultValues: {
-            organizationName: "",
-            subdomain: "",
-            industry: "",
-            email: "",
-            password: "",
-        },
+    } = useForm<ExtendedSignupValues>({
+        resolver: zodResolver(extendedSignupSchema),
+        mode: "onChange",
+        defaultValues: { email: "", otp: "", password: "", organizationName: "", subdomain: "", industry: "" },
     });
 
-    const onSubmit = async (data: HostSignupValues) => {
+    const selectedIndustry = useWatch({
+        control,
+        name: "industry",
+    });
+
+    // Navigation Logic
+    const handleSocialSignup = async (provider: SocialProvider) => {
+        setActiveProvider(provider);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        setValue("email", "user@example.com"); // Mock
+        setCurrentStep("INDUSTRY");
+        setActiveProvider(null);
+    };
+
+    const goToVerify = async () => {
+        if (await trigger("email")) {
+            setCurrentStep("VERIFY");
+            toast.success("Code sent!");
+        }
+    };
+
+    const goToIndustry = () => {
+        if (getValues("otp").length === 4) setCurrentStep("INDUSTRY");
+        else toast.error("Enter valid code");
+    };
+
+    const goToDetails = () => {
+        if (selectedIndustry) setCurrentStep("DETAILS");
+        else toast.error("Please select an industry");
+    };
+
+    const onSubmit = async (data: ExtendedSignupValues) => {
         try {
-            // Logic for creating the tenant and Stripe Connect account goes here
-            console.log("Global Onboarding Data:", data);
-
-            // Simulate API call
             await new Promise((resolve) => setTimeout(resolve, 2000));
-
-            toast.success("Arena Created! Redirecting to your subdomain...");
-        } catch (error) {
-            toast.error("Failed to launch. Please check your connection.");
+            toast.success("Arena Launched!");
+        } catch (err) {
+            console.error(err);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            <ArenaInput
-                label="Organization Name"
-                placeholder="e.g. ABC Corp"
-                {...register("organizationName")}
-                error={errors.organizationName?.message}
-            />
-
-            <ArenaInput
-                label="Workspace URL"
-                placeholder="my-arena"
-                {...register("subdomain", {
-                    onChange: (e) => {
-                        e.target.value = e.target.value
-                            .toLowerCase()
-                            .replace(/[^a-z0-9-]/g, "");
-                    }
-                })}
-                error={errors.subdomain?.message}
-                rightElement={
-                    <span className="text-[10px] font-black text-muted-foreground/40 pr-4">
-                        .greenlight.app
-                    </span>
-                }
-            />
-
-            <Controller
-                name="industry"
-                control={control}
-                render={({ field }) => (
-                    <ArenaSelect
-                        label="Industry"
-                        placeholder="Select Sector"
-                        options={INDUSTRY_OPTIONS}
-                        value={field.value}
-                        onChange={field.onChange}
-                        error={errors.industry?.message}
-                    />
-                )}
-            />
-
-            <ArenaInput
-                label="Work Email"
-                type="email"
-                placeholder="admin@abccoprs.com"
-                {...register("email")}
-                error={errors.email?.message}
-            />
-
-            <ArenaInput
-                label="Password"
-                type="password"
-                placeholder="••••••••"
-                {...register("password")}
-                error={errors.password?.message}
-            />
-
-            <div className="pt-2">
-                <ArenaButton isLoading={isSubmitting} type="submit">
-                    Initialize My Arena
-                </ArenaButton>
+        <div className="space-y-8">
+            {/* Header section */}
+            <div className="text-center">
+                <h1 className="text-3xl font-black text-foreground tracking-tight">
+                    {currentStep === "EMAIL" && "Ignite your crowd!"}
+                    {currentStep === "VERIFY" && "Verify your email"}
+                    {currentStep === "INDUSTRY" && "Choose your sector"}
+                    {currentStep === "DETAILS" && "Almost there!"}
+                </h1>
             </div>
-        </form>
+
+            {/* STEP 1: EMAIL */}
+            {currentStep === "EMAIL" && (
+                <div className="space-y-6">
+                    <SocialAuthSection activeProvider={activeProvider} onProviderClick={handleSocialSignup} />
+                    <ArenaInput label="Work Email" {...register("email")} error={errors.email?.message} />
+                    <ArenaButton onClick={goToVerify}>Continue</ArenaButton>
+                </div>
+            )}
+
+            {/* STEP 2: VERIFY */}
+            {currentStep === "VERIFY" && (
+                <div className="space-y-6">
+                    <ArenaInput label="4-Digit Code" maxLength={4} className="text-center text-2xl tracking-widest" {...register("otp")} />
+                    <ArenaButton onClick={goToIndustry}>Verify & Continue</ArenaButton>
+                </div>
+            )}
+
+            {/* STEP 3: INDUSTRY (KAHOOT STYLE) */}
+            {currentStep === "INDUSTRY" && (
+                <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-2">
+                        {INDUSTRY_OPTIONS.map((option, index) => {
+                            const colors = [
+                                "bg-[#E21B3C]",
+                                "bg-[#1368CE]",
+                                "bg-[#D89E00]", 
+                                "bg-[#26890C]",
+                            ];
+                            const cardColor = colors[index % colors.length];
+
+                            return (
+                                <button
+                                    key={option.value}
+                                    type="button"
+                                    onClick={() => setValue("industry", option.value)}
+                                    className={clsx(
+                                        "relative flex items-center justify-center p-3 rounded-lg border-b-4 transition-all active:scale-95 active:border-b-0 active:mt-1",
+                                        selectedIndustry === option.value
+                                            ? `${cardColor} border-black/20 text-white`
+                                            : "bg-card border-muted text-card-foreground hover:bg-muted/50"
+                                    )}
+                                >
+                                    
+                                    <div className={clsx(
+                                        "absolute left-3 w-3 h-3 opacity-40",
+                                        index % 4 === 0 && "rotate-45 border-2 border-current",
+                                        index % 4 === 1 && "rounded-full border-2 border-current",
+                                        index % 4 === 2 && "border-2 border-current",
+                                        index % 4 === 3 && "w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-bottom-[10px] border-bottom-current" // Triangle
+                                    )} />
+
+                                    <span className="text-xs font-black uppercase tracking-wider pl-4">
+                                        {option.label}
+                                    </span>
+                                </button>
+                            );
+                        })}
+                    </div>
+
+                    <ArenaButton
+                        onClick={goToDetails}
+                        disabled={!selectedIndustry}
+                        className="mt-2"
+                    >
+                        Next Step
+                    </ArenaButton>
+                </div>
+            )}
+
+            {/* STEP 4: DETAILS */}
+            {currentStep === "DETAILS" && (
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                    <ArenaInput label="Password" type="password" {...register("password")} error={errors.password?.message} />
+                    <ArenaInput label="Organization Name" {...register("organizationName")} error={errors.organizationName?.message} />
+                    <ArenaInput
+                        label="Workspace URL"
+                        {...register("subdomain")}
+                        rightElement={<span className="pr-4 text-xs opacity-40">.greenlight.app</span>}
+                        error={errors.subdomain?.message}
+                    />
+                    <div className="flex gap-3 pt-2">
+                        <ArenaButton type="button" variant="outline" onClick={() => setCurrentStep("INDUSTRY")}>Back</ArenaButton>
+                        <ArenaButton isLoading={isSubmitting} type="submit">Setup</ArenaButton>
+                    </div>
+                </form>
+            )}
+
+            <div className="text-center pt-2">
+                <p className="text-sm font-bold text-muted-foreground">
+                    Already have an account?{" "}
+                    <Link href="/login" prefetch className="text-brand-primary hover:underline font-black">
+                        Log in
+                    </Link>
+                </p>
+            </div>
+        </div>
     );
 }

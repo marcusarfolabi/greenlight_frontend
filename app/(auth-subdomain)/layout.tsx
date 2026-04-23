@@ -7,7 +7,7 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
     return (
         <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300 relative overflow-x-hidden">
             <div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brand-primary/20 blur-[80px] md:blur-[120px] rounded-full pointer-events-none z-0"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 h-75 md:w-125 md:h-125 bg-brand-primary/20 blur-[80px] md:blur-[120px] rounded-full pointer-events-none z-0"
                 aria-hidden="true"
             />
 
