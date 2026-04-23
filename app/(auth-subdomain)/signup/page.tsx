@@ -85,7 +85,7 @@ export default function HostSignupForm() {
             <ArenaInput
                 label="Work Email"
                 type="email"
-                placeholder="admin@company.com"
+                placeholder="admin@abccoprs.com"
                 {...register("email")}
                 error={errors.email?.message}
             />

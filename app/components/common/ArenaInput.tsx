@@ -56,7 +56,7 @@ export const ArenaInput = ({
                         onClick={() => setShowPassword(!showPassword)}
                         aria-label={showPassword ? "Hide password" : "Show password"}
                         title={showPassword ? "Hide password" : "Show password"}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-muted-foreground/60 hover:text-brand-primary transition-colors focus:outline-none focus:text-brand-primary"
+                        className="absolute lowercase right-4 top-1/2 -translate-y-1/2 p-1 text-muted-foreground/60 hover:text-brand-primary transition-colors focus:outline-none focus:text-brand-primary"
                         tabIndex={-1}
                     >
                         {showPassword ? (
@@ -69,7 +69,7 @@ export const ArenaInput = ({
             </div>
 
             {error && (
-                <p className="text-[10px] font-black text-destructive uppercase px-1 animate-in fade-in slide-in-from-top-1">
+                <p className="text-[10px] font-black text-red-500 capitalize px-1 animate-in fade-in slide-in-from-top-1">
                     {error}
                 </p>
             )}
