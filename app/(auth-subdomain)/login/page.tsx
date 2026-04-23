@@ -49,11 +49,27 @@ export default function LoginPage() {
 
             {/* Social Login Section */}
             <div className="space-y-3">
-                <SocialButton
-                    provider="google"
-                    isLoading={googleLoading}
-                    onClick={handleGoogleLogin}
-                />
+              {/* Social Login Section */}
+<div className="flex items-center gap-3 w-full">
+    <SocialButton
+        provider="google"
+        isLoading={googleLoading}
+        onClick={handleGoogleLogin}
+        className="flex-1" // Allows buttons to grow equally
+    />
+    <SocialButton
+        provider="apple"
+        isLoading={googleLoading}
+        onClick={handleGoogleLogin}
+        className="flex-1"
+    />
+    <SocialButton
+        provider="linkedin"
+        isLoading={googleLoading}
+        onClick={handleGoogleLogin}
+        className="flex-1"
+    />
+</div>
             </div>
 
             {/* The Divider */}
