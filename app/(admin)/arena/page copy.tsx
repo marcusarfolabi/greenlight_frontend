@@ -8,7 +8,7 @@ const MOCK_QUIZZES = [
     { id: "2", title: "Global Sales Kickoff", participants: 0, status: "Ready" },
 ];
 
-export default function AdminDashboard() {
+export default function Arena() {
     return (
         <div className="p-8 max-w-7xl mx-auto space-y-8">
             <div className="flex justify-between items-end">
