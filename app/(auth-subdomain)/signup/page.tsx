@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod"; 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
 import { ArenaButton } from "@/app/components/common/ArenaButton";
 import { ArenaInput } from "@/app/components/common/ArenaInput";
@@ -44,7 +44,7 @@ export default function HostSignupForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <ArenaInput
                 label="Organization Name"
-                placeholder="e.g. Falcon Omni-Connect"
+                placeholder="e.g. ABC Corp"
                 {...register("organizationName")}
                 error={errors.organizationName?.message}
             />
@@ -52,7 +52,13 @@ export default function HostSignupForm() {
             <ArenaInput
                 label="Workspace URL"
                 placeholder="my-arena"
-                {...register("subdomain")}
+                {...register("subdomain", {
+                    onChange: (e) => {
+                        e.target.value = e.target.value
+                            .toLowerCase()
+                            .replace(/[^a-z0-9-]/g, "");
+                    }
+                })}
                 error={errors.subdomain?.message}
                 rightElement={
                     <span className="text-[10px] font-black text-muted-foreground/40 pr-4">
@@ -70,7 +76,7 @@ export default function HostSignupForm() {
                         placeholder="Select Sector"
                         options={INDUSTRY_OPTIONS}
                         value={field.value}
-                        onChange={field.onChange} 
+                        onChange={field.onChange}
                         error={errors.industry?.message}
                     />
                 )}
