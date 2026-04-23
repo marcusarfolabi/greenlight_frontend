@@ -1,14 +1,8 @@
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
-    const host = (await headers()).get("host");
-
-    if (process.env.NODE_ENV === "production" && host === "greenlight-quiz.vercel.app") {
-        redirect(`https://auth.greenlight-quiz.vercel.app`);
-    }
+   
 
     return (
         <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300 relative overflow-x-hidden">

@@ -6,8 +6,7 @@ import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ThemeToggle } from "../theme-toggle"
-import { NAV_LINKS } from "@/settings"
-import { AUTH_URL } from "@/app/lib/constants"
+import { NAV_LINKS } from "@/settings" 
 
 export function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false)
@@ -54,13 +53,13 @@ export function Navbar() {
                     </Link>
 
                     <Link
-                        href={`${AUTH_URL}/signup`} prefetch
+                        href={`/signup`} prefetch
                         className="btn-quiz py-1.5 px-3 sm:py-2 sm:px-5 text-[10px] sm:text-xs lg:text-sm whitespace-nowrap"
                     >
                         Start for FREE
                     </Link>
 
-                    <Link href={`${AUTH_URL}/login`} prefetch className="text-[11px] sm:text-sm font-black uppercase hover:text-brand-primary px-1">
+                    <Link href={`/login`} prefetch className="text-[11px] sm:text-sm font-black uppercase hover:text-brand-primary px-1">
                         Log in
                     </Link>
 
