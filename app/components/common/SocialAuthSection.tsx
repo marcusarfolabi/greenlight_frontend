@@ -18,7 +18,7 @@ export function SocialAuthSection({
     return (
         <>
             <div className="space-y-3">
-                <div className="flex items-center gap-3 w-full">
+                <div className="flex items-center gap-1 w-full">
                     {SOCIAL_PROVIDERS.map((provider) => (
                         <SocialButton
                             key={provider}

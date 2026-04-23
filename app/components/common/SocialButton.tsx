@@ -18,7 +18,7 @@ export const SocialButton = ({ provider, isLoading, className, ...props }: Socia
             type="button"
             disabled={isLoading}
             className={clsx(
-                "group relative cursor-pointer w-full h-12 px-4 rounded-xl transition-all duration-200",
+                "group relative cursor-pointer w-full h-12 px-2 rounded-xl transition-all duration-200",
                 "flex items-center justify-center gap-3 border",
                 "text-sm font-semibold tracking-tight",
                 "bg-white text-slate-700 border-slate-200 shadow-sm",

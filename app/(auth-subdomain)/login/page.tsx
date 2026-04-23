@@ -46,6 +46,7 @@ export default function LoginPage() {
             </div>
 
             <SocialAuthSection activeProvider={activeProvider} onProviderClick={handleSocialLogin} />
+            
             <form onSubmit={handleLogin} className="space-y-4">
                 <ArenaInput
                     label="Email or Username"
