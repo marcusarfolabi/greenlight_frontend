@@ -3,6 +3,7 @@ import { Hero } from "./components/landingPage/Hero";
 import { Features } from "./components/landingPage/Features";
 import { Audience } from "./components/landingPage/Audience";
 import { FAQ } from "./components/landingPage/FAQ";
+import { Footer } from "./components/landingPage/Footer";
 
 export default function Home() {
   return (
@@ -13,6 +14,8 @@ export default function Home() {
       <FAQ  />
       
       <StickyActionFooter />
+      <Footer />
+    
     </main>
   );
 }

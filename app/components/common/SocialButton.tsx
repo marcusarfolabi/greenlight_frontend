@@ -16,7 +16,6 @@ export const SocialButton = ({ provider, isLoading, className, ...props }: Socia
     return (
         <button
             type="button"
-            title={`Continue with ${label}`}
             disabled={isLoading}
             className={clsx(
                 "group relative cursor-pointer w-full h-12 px-4 rounded-xl transition-all duration-200",
@@ -32,6 +31,9 @@ export const SocialButton = ({ provider, isLoading, className, ...props }: Socia
             )}
             {...props}
         >
+            <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-[10px] font-bold text-background bg-foreground rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                {`Continue with ${label}`}
+            </span>
             {isLoading ? (
                 <Loader2 className="w-4 h-4 animate-spin text-slate-400" />
             ) : (

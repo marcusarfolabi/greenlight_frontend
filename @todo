@@ -19,3 +19,25 @@ frontend/
 │   ├── lib/                      # Utils (cn helper, database config)
 │   └── types/                    # TypeScript interfaces for Quizzes
 ├── public/                       # Audio files (click.mp3) and SVGs
+
+
+app/
+└── (admin)/
+    ├── dashboard/               # Quiz Management Dashboard 
+    │   └── page.tsx             # Overview of all quizzes
+    ├── quiz/
+    │   ├── [id]/
+    │   │   ├── edit/            # Quiz Creator/Editor Screen 
+    │   │   │   └── page.tsx
+    │   │   └── config/          # Question Configuration (Timers, etc.) [cite: 37]
+    │   │       └── page.tsx
+    ├── live/
+    │   └── [id]/
+    │       ├── host/            # Live Host Console (Join Codes/Start) 
+    │       │   └── page.tsx
+    │       ├── controls/        # Manual Flow Control 
+    │       │   └── page.tsx
+    │       └── leaderboard/     # Live Oversight Leaderboard 
+    │           └── page.tsx
+    └── components/
+        └── admin/               # Admin-specific UI components

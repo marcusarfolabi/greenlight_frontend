@@ -6,9 +6,9 @@ export const hostSignupSchema = z.object({
     .string()
     .min(3, "Subdomain is too short")
     .regex(/^[a-z0-9-]+$/, "Use only lowercase, numbers, and hyphens")
-    .transform((val) => val.toLowerCase()), 
+    .transform((val) => val.toLowerCase()),
   industry: z.string().min(1, "Please select your industry"),
-  email: z.string().email("Enter a valid work email"),
+  email: z.string().email("Enter a valid Email"),
   password: z
     .string()
     .min(8, "Password must be at least 8 characters")

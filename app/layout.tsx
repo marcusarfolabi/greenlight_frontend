@@ -103,7 +103,6 @@ export default function RootLayout({
           </main>
           <InstallPrompt />
           <ArenaToaster />
-          <Footer />
         </ThemeProvider>
       </body>
     </html>

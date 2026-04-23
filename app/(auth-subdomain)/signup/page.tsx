@@ -95,7 +95,7 @@ export default function HostSignupForm() {
             {currentStep === "EMAIL" && (
                 <div className="space-y-6">
                     <SocialAuthSection activeProvider={activeProvider} onProviderClick={handleSocialSignup} />
-                    <ArenaInput label="Work Email" {...register("email")} error={errors.email?.message} />
+                    <ArenaInput label="Email" {...register("email")} error={errors.email?.message} />
                     <ArenaButton onClick={goToVerify}>Continue</ArenaButton>
                 </div>
             )}
@@ -103,7 +103,7 @@ export default function HostSignupForm() {
             {/* STEP 2: VERIFY */}
             {currentStep === "VERIFY" && (
                 <div className="space-y-6">
-                    <ArenaInput label="4-Digit Code" maxLength={4} className="text-center text-2xl tracking-widest" {...register("otp")} />
+                    <ArenaInput label="4-Digit Code" max={4} maxLength={4} className="text-center text-2xl tracking-widest" {...register("otp")} />
                     <ArenaButton onClick={goToIndustry}>Verify & Continue</ArenaButton>
                 </div>
             )}
@@ -116,7 +116,7 @@ export default function HostSignupForm() {
                             const colors = [
                                 "bg-[#E21B3C]",
                                 "bg-[#1368CE]",
-                                "bg-[#D89E00]", 
+                                "bg-[#D89E00]",
                                 "bg-[#26890C]",
                             ];
                             const cardColor = colors[index % colors.length];
@@ -133,7 +133,7 @@ export default function HostSignupForm() {
                                             : "bg-card border-muted text-card-foreground hover:bg-muted/50"
                                     )}
                                 >
-                                    
+
                                     <div className={clsx(
                                         "absolute left-3 w-3 h-3 opacity-40",
                                         index % 4 === 0 && "rotate-45 border-2 border-current",
