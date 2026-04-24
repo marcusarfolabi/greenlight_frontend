@@ -75,25 +75,32 @@ export default function GameEntryScreen() {
                     <div className="animate-in fade-in zoom-in duration-300">
                         <div className="space-y-4 mb-10">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-primary/10 text-brand-primary text-[10px] font-black uppercase tracking-widest">
-                                <Radio className="w-3 h-3" /> Live Arena
+                                <Radio className="w-3 h-3 animate-ping" /> Live Arena
                             </div>
-                            <h1 className="text-5xl font-black italic uppercase tracking-tighter">
-                                Ready to <span className="text-brand-primary">Play?</span>
+                            <h1 className="text-5xl font-black   uppercase tracking-tighter">
+                                Enter the  <span className="text-brand-primary">Arena</span>
                             </h1>
                         </div>
 
-                        <form onSubmit={handlePinSubmit} className="space-y-6">
-                            <ArenaInput
-                                placeholder="0000"
-                                label=""
-                                maxLength={4}
-                                className="text-center text-6xl font-black tracking-[1.5rem] h-28 bg-card border-b-[12px] border-brand-primary/30 focus:border-brand-primary shadow-2xl"
-                                value={pin}
-                                onChange={(e) => setPin(e.target.value)}
-                            />
-                            <ArenaButton type="submit" isLoading={isProcessing} className="h-20 text-2xl font-black uppercase italic">
-                                Next
-                            </ArenaButton>
+                        <form onSubmit={handlePinSubmit} className="w-full space-y-6">
+                            <div className="relative">
+
+                                <ArenaInput
+                                    placeholder="0000"
+                                    label=""
+                                    maxLength={4}
+                                    className="text-center text-6xl font-black tracking-[1.5rem] h-28 bg-card border-b-[12px] border-brand-primary/30 focus:border-brand-primary shadow-2xl"
+                                    value={pin}
+                                    onChange={(e) => setPin(e.target.value)}
+                                />
+                                <ArenaButton
+                                    type="submit"
+                                    isLoading={isProcessing}
+                                    className="h-20 text-2xl font-black uppercase mt-4">
+
+                                    Join Lobby
+                                </ArenaButton>
+                            </div>
                         </form>
                     </div>
                 )}

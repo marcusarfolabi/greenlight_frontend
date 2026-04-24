@@ -66,7 +66,7 @@ export default function PlayVerifyScreen() {
             <form onSubmit={handleSubmit(onVerifyCode)} className="w-full space-y-6">
                 <div className="relative">
                     <ArenaInput
-                        label="Entry Code"
+                        label=""
                         placeholder="0 0 0 0"
                         max={4}
                         maxLength={4}

@@ -15,7 +15,7 @@ const INITIAL_PLAYERS = [
     { id: "4", name: "MightySeeker", color: "bg-[#D89E00]" },
 ];
 
-export default function GameLobbyScreen({ username = "You", pin = "8888" }) { 
+export default function GameLobbyScreen({ username = "You", pin = "8888" }) {
     const [trackInfo] = useState(() => {
         const num = Math.floor(Math.random() * 8) + 1;
         return {
@@ -30,11 +30,11 @@ export default function GameLobbyScreen({ username = "You", pin = "8888" }) {
     const [timeLeft, setTimeLeft] = useState(60);
     const [isMuted, setIsMuted] = useState(true);
     const lobbyAudioRef = useRef<HTMLAudioElement | null>(null);
- 
+
     const playJoinSound = useCallback(() => {
         const joinSfx = new Audio("/audios/join.mp3");
         joinSfx.volume = 0.3;
-        
+
         joinSfx.play().catch((err) => {
             console.warn("Join sound blocked: User hasn't interacted yet.");
         });
@@ -86,7 +86,7 @@ export default function GameLobbyScreen({ username = "You", pin = "8888" }) {
                 color: "bg-brand-primary"
             };
             setPlayers((prev) => [...prev, newPlayer]);
-            
+
             playJoinSound();
         }, 4000);
 
