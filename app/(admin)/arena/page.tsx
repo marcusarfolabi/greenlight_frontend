@@ -43,6 +43,7 @@ const StatCard = ({ stat, index }: { stat: any; index: number }) => (
         <div className={`p-4 rounded-2xl bg-slate-50 ${stat.color}`}>
             <stat.icon className="w-8 h-8" />
         </div>
+        
         <div>
             <p className="text-xs font-black text-slate-400 uppercase tracking-tighter">
                 {stat.label}
@@ -86,7 +87,7 @@ const STATS = [
 // --- Main Page ---
 
 export default function ArenaDashboard() {
-    return ( 
+    return (
         <div className="flex flex-col gap-y-8 lg:gap-y-10 p-4 lg:p-0">
             {/* 1. HEADER SECTION */}
             <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 lg:gap-6">
@@ -110,11 +111,11 @@ export default function ArenaDashboard() {
                 </ArenaButton>
             </header>
 
-            {/* 2. STATS OVERVIEW */} 
+            {/* 2. STATS OVERVIEW */}
             <div className="relative z-0 flex flex-col md:flex-row gap-4 lg:gap-6">
                 {STATS.map((stat, i) => (
                     <div
-                        key={stat.label} 
+                        key={stat.label}
                         className="flex-1 min-w-0"
                     >
                         <StatCard stat={stat} index={i} />
@@ -138,13 +139,12 @@ export default function ArenaDashboard() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.1 }}
-                            className="group bg-white border-b-[4px] lg:border-b-[6px] border-slate-200 hover:border-primary border-2 p-4 lg:p-6 rounded-[1.5rem] lg:rounded-[2rem] transition-all relative overflow-hidden"
+                            className="group bg-white border-b-4 lg:border-b-[6px] border-slate-200 hover:border-primary border-2 p-4 lg:p-6 rounded-3xl lg:rounded-4xl transition-all relative overflow-hidden"
                         >
                             <div className={`absolute top-0 left-0 w-1.5 lg:w-2 h-full ${quiz.color}`} />
-
                             <div className="flex gap-4 lg:gap-6">
-                                {/* Visual Icon: Fixed size on mobile to prevent squishing */}
-                                <div className={`w-20 h-20 lg:w-32 lg:h-32 rounded-xl lg:rounded-2xl ${quiz.color} flex items-center justify-center text-white shadow-inner flex-shrink-0`}>
+
+                                <div className={`w-20 h-20 lg:w-32 lg:h-32 rounded-xl lg:rounded-2xl ${quiz.color} flex items-center justify-center text-white shadow-inner shrink-0`}>
                                     <Zap className="w-8 h-8 lg:w-12 lg:h-12 fill-white/20" />
                                 </div>
 

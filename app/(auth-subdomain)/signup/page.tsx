@@ -7,23 +7,29 @@ import { z } from "zod";
 import { toast } from "react-hot-toast";
 import { ArenaButton } from "@/app/components/common/ArenaButton";
 import { ArenaInput } from "@/app/components/common/ArenaInput";
-import { SocialAuthSection } from "@/app/components/common/SocialAuthSection";
 import { SocialProvider } from "@/app/components/common/SocialButton";
 import { HostSignupValues, hostSignupSchema } from "@/app/lib/validations/auth";
 import { INDUSTRY_OPTIONS } from "@/settings";
 import clsx from "clsx";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
+// Added role to the schema
 const extendedSignupSchema = hostSignupSchema.extend({
     otp: z.string(),
+    role: z.enum(["USER", "HOST"]),
+    username: z.string().min(3, "Username required"),
 });
 
-type ExtendedSignupValues = HostSignupValues & { otp: string };
-type Step = "EMAIL" | "VERIFY" | "INDUSTRY" | "DETAILS";
+type ExtendedSignupValues = HostSignupValues & { otp: string; role: "USER" | "HOST"; username: string };
+// New Step: ROLE_SELECTION
+type Step = "ROLE_SELECTION" | "EMAIL" | "VERIFY" | "INDUSTRY" | "DETAILS";
 
-export default function HostSignupForm() {
-    const [currentStep, setCurrentStep] = useState<Step>("EMAIL");
+export default function SignupForm() {
+    const [currentStep, setCurrentStep] = useState<Step>("ROLE_SELECTION");
     const [activeProvider, setActiveProvider] = useState<SocialProvider | null>(null);
+
+    const router = useRouter();
 
     const {
         control,
@@ -36,15 +42,26 @@ export default function HostSignupForm() {
     } = useForm<ExtendedSignupValues>({
         resolver: zodResolver(extendedSignupSchema),
         mode: "onChange",
-        defaultValues: { email: "", otp: "", password: "", organizationName: "", subdomain: "", industry: "" },
+        defaultValues: {
+            role: "USER",
+            email: "",
+            otp: "",
+            password: "",
+            username: "",
+            organizationName: "",
+            subdomain: "",
+            industry: ""
+        },
     });
 
-    const selectedIndustry = useWatch({
-        control,
-        name: "industry",
-    });
+    const selectedIndustry = useWatch({ control, name: "industry" });
+    const selectedRole = useWatch({ control, name: "role" });
 
-    // Navigation Logic
+    const handleRoleSelect = (role: "USER" | "HOST") => {
+        setValue("role", role);
+        setCurrentStep("EMAIL");
+    };
+
     const handleSocialSignup = async (provider: SocialProvider) => {
         setActiveProvider(provider);
         await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -70,12 +87,28 @@ export default function HostSignupForm() {
         else toast.error("Please select an industry");
     };
 
+    const handleVerification = () => {
+        if (getValues("otp").length === 4) {
+            if (selectedRole === "USER") {
+                // If it's a USER, they are done after verification
+                onSubmit(getValues());
+            } else {
+                // If it's a HOST, proceed to industry selection
+                setCurrentStep("INDUSTRY");
+            }
+        } else {
+            toast.error("Enter valid 4-digit code");
+        }
+    };
+
     const onSubmit = async (data: ExtendedSignupValues) => {
         try {
+            // API Call logic here (UserService.create_user or OrganizationService.create_host)
             await new Promise((resolve) => setTimeout(resolve, 2000));
-            toast.success("Arena Launched!");
+            toast.success(data.role === "HOST" ? "Arena Launched!" : "Welcome to the Arena!");
+            router.push(data.role === "HOST" ? "/arena" : "/player");
         } catch (err) {
-            console.error(err);
+            toast.error("Signup failed");
         }
     };
 
@@ -84,31 +117,55 @@ export default function HostSignupForm() {
             {/* Header section */}
             <div className="text-center">
                 <h1 className="text-3xl font-black text-foreground tracking-tight">
-                    {currentStep === "EMAIL" && "Ignite your crowd!"}
+                    {currentStep === "ROLE_SELECTION" && "How will you play?"}
+                    {currentStep === "EMAIL" && (selectedRole === "HOST" ? "Ignite your crowd!" : "Join the Arena!")}
                     {currentStep === "VERIFY" && "Verify your email"}
                     {currentStep === "INDUSTRY" && "Choose your sector"}
                     {currentStep === "DETAILS" && "Almost there!"}
                 </h1>
             </div>
 
-            {/* STEP 1: EMAIL */}
-            {currentStep === "EMAIL" && (
-                <div className="space-y-6">
-                    <SocialAuthSection activeProvider={activeProvider} onProviderClick={handleSocialSignup} />
-                    <ArenaInput label="Email" {...register("email")} error={errors.email?.message} />
-                    <ArenaButton onClick={goToVerify}>Continue</ArenaButton>
+            {/* STEP 0: ROLE SELECTION */}
+            {currentStep === "ROLE_SELECTION" && (
+                <div className="grid grid-cols-1 gap-4">
+                    <button
+                        onClick={() => handleRoleSelect("USER")}
+                        className="p-6 bg-brand-primary text-white rounded-xl border-b-4 border-black/20 hover:brightness-110 transition-all font-black text-xl"
+                    >
+                        I&apos;M A PLAYER
+                    </button>
+                    <button
+                        onClick={() => handleRoleSelect("HOST")}
+                        className="p-6 bg-[#1368CE] text-white rounded-xl border-b-4 border-black/20 hover:brightness-110 transition-all font-black text-xl"
+                    >
+                        I&apos;M A HOST
+                    </button>
                 </div>
             )}
 
-            {/* STEP 2: VERIFY */}
+            {/* STEP 1: ACCOUNT BASICS (Username, Email, Password) */}
+            {currentStep === "EMAIL" && (
+                <div className="space-y-4">
+                    <ArenaInput label="Username" {...register("username")} error={errors.username?.message} />
+                    <ArenaInput label="Email" {...register("email")} error={errors.email?.message} />
+                    <ArenaInput label="Password" type="password" {...register("password")} error={errors.password?.message} />
+                    <ArenaButton onClick={goToVerify}>Continue</ArenaButton>
+                    <button onClick={() => setCurrentStep("ROLE_SELECTION")} className="text-xs opacity-50 w-full">Change Role</button>
+                </div>
+            )}
+
+            {/* STEP 2: VERIFY (OTP) */}
             {currentStep === "VERIFY" && (
                 <div className="space-y-6">
+                    <p className="text-center text-sm opacity-60">Enter the OTP sent to your email</p>
                     <ArenaInput label="4-Digit Code" max={4} maxLength={4} className="text-center text-2xl tracking-widest" {...register("otp")} />
-                    <ArenaButton onClick={goToIndustry}>Verify & Continue</ArenaButton>
+                    <ArenaButton isLoading={isSubmitting && selectedRole === "USER"} onClick={handleVerification}>
+                        {selectedRole === "USER" ? "Complete Signup" : "Verify & Continue"}
+                    </ArenaButton>
                 </div>
             )}
 
-            {/* STEP 3: INDUSTRY (KAHOOT STYLE) */}
+            {/* STEP 3: INDUSTRY (HOST ONLY) */}
             {currentStep === "INDUSTRY" && (
                 <div className="space-y-4">
                     <div className="grid grid-cols-2 gap-2">
@@ -160,10 +217,9 @@ export default function HostSignupForm() {
                 </div>
             )}
 
-            {/* STEP 4: DETAILS */}
+            {/* STEP 4: ORG DETAILS (HOST ONLY) */}
             {currentStep === "DETAILS" && (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-                    <ArenaInput label="Password" type="password" {...register("password")} error={errors.password?.message} />
                     <ArenaInput label="Organization Name" {...register("organizationName")} error={errors.organizationName?.message} />
                     <ArenaInput
                         label="Workspace URL"
@@ -173,17 +229,16 @@ export default function HostSignupForm() {
                     />
                     <div className="flex gap-3 pt-2">
                         <ArenaButton type="button" variant="outline" onClick={() => setCurrentStep("INDUSTRY")}>Back</ArenaButton>
-                        <ArenaButton isLoading={isSubmitting} type="submit">Setup</ArenaButton>
+                        <ArenaButton isLoading={isSubmitting} type="submit">Setup Arena</ArenaButton>
                     </div>
                 </form>
             )}
 
+            {/* Footer */}
             <div className="text-center pt-2">
                 <p className="text-sm font-bold text-muted-foreground">
                     Already have an account?{" "}
-                    <Link href="/login" prefetch className="text-brand-primary hover:underline font-black">
-                        Log in
-                    </Link>
+                    <Link href="/login" className="text-brand-primary hover:underline font-black">Log in</Link>
                 </p>
             </div>
         </div>
